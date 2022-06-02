@@ -1,19 +1,149 @@
 <html lang="en">
   <head>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+        <script defer type="text/javascript">
+            document.addEventListener("DOMContentLoaded", () => {
+                liff
+                    .init({
+                        liffId: "1655828362-KLxYgqxg",
+                    })
+                    .then(() => {
+    
+    
+                               document.getElementById('qrcode').addEventListener('click', () => {
+                                  liff.scanCodeV2().then(result => {
+                                    result = { value: "" }
+                                   });
+                               });
+
+
+                               liff.getProfile()
+                                                .then(function (profile) {
+                                                    document.getElementById('useridprofilefield').textContent = profile.userId;
+                                                    document.getElementById('displaynamefield').textContent = profile.displayName;
+
+                                                    var profilePictureDiv = document.getElementById('profilepicturediv');
+                                                    if (profilePictureDiv.firstElementChild) {
+                                                        profilePictureDiv.removeChild(profilePictureDiv.firstElementChild);
+                                                    }
+                                                    var img = document.createElement('img');
+                                                    img.src = profile.pictureUrl;
+                                                    img.alt = "Profile Picture";
+                                                    img.width = 200;
+                                                    profilePictureDiv.appendChild(img);
+
+                                                    document.getElementById('statusmessagefield').textContent = profile.statusMessage;
+                                                }).catch(function (error) {
+                                                    window.alert("Error getting profile: " + error);
+                                                });
+
+
+
+                            // Check if shareTargetPicker is available
+                                            document.getElementById('add_to_home').addEventListener('click', () => {				
+                            if (liff.isApiAvailable('addToHomeScreen')) {
+                                liff.addToHomeScreen({
+                              name: "LINE",
+                              iconUrl: "https://obs-beta.line-scdn.net/0hi2dU1wubNh1ZLCCnLGVJSntxPX9qTigWexgyezx-HU0oSQRLLjEmH3RQDVY_TwQ3LjUyJidHHkkyYAMgZiscAyB8DSw8dDc/f256x256",
+                              state: "/search?q=foo"
+                                }).then((status) => {
+                              // status == -1:  // canceled. If user cancel to add, return -1 (only Android under 8)
+                              // status == 0:   // unknown. iOS always return 0
+                              // status == 1:   // added. If shortcut created, return 1 (Android above 8 will always be 1)
+                                }).catch(function(res) {
+                                  console.log("Failed to launch addToHomeScreen")
+                                })
+                            }else {
+                                  console.log("isApiAvailable Error")
+                            }
+                          });
+
+
+
+                    //                         document.getElementById('add_to_home').addEventListener('click', () => {
+                    //                             liff.addToHomeScreen({
+                    //                                 name: "LINE",
+                    //                                 iconUrl: "https://obs-beta.line-scdn.net/0hi2dU1wubNh1ZLCCnLGVJSntxPX9qTigWexgyezx-HU0oSQRLLjEmH3RQDVY_TwQ3LjUyJidHHkkyYAMgZiscAyB8DSw8dDc/f256x256",
+                    //                                 state: "/search?q=foo"
+                    //                             }).then((status) => {
+
+                    //                             })
+                    //                         });
+
+                          document.getElementById('subwindow').addEventListener('click', () => {
+                              liff.subWindow.open({
+                                url: 'https://liff.line-beta.me/1651833066-zO3vlq60/line',
+                    // 						url: 'https://liff-beta2.netlify.app/line',
+                    // 						url: 'www.naver.com',
+                              })
+
+                          });
+
+                          document.getElementById('module_subwindow').addEventListener('click', () => {
+                              liff.subWindow.open({
+                                url: 'https://liff.line.me/1655821834-xg4aVz10',
+                              })
+
+                          });
+
+
+                          document.getElementById('iab').addEventListener('click', () => {
+                              liff.openWindow({
+                    // 					  url: "https://polite-druid-c85040.netlify.app/",
+                              url: "https://liff.line-beta.me/1651833033-3qqQE5V7",
+                                external: false,
+                              });
+
+                          });
+
+                          document.getElementById('opensetting').addEventListener('click', () => {
+                              liff.openWindow({
+                                url: "lineb://nv/settings",
+                                external: false,
+                              });
+                              liff.closeWindow();
+
+
+                          });
+
+                    // 			document.getElementById('qrcode').addEventListener('click', () => {
+                    // 					liff.scanCodeV2().then((result) => {
+                    // 					   result = { value: "" }
+                    // 					});
+                    // 				alert("TQ");
+                    //                         });
+
+                          document.getElementById('external').addEventListener('click', () => {
+                              liff.openWindow({
+                                url: "https://liff.line.me/1655828362-KLxYgqxg",
+                                external: true,
+                              });
+
+                          });
+                })
+            });
+          </script>
   </head>
     
     <body>
-      <h1 id="a"></h1>
-    <script type="text/javascript">
-        liff.init({ liffId: 'xxxxxxxxxxxxxxxxxxxxx' });
-       
-        const a = window.localStorage.getItem('a');  // 1回目はnull
-       
-        const el = document.getElementById("a");  // 取得した値を画面へ出力
-        el.innerHTML = a;
-       
-        window.localStorage.setItem('a', 'XXXXX');  // localStorageに保存
+      <h1>Wdlcome to Ramen King!</h1>
+      <h3 id="displaynamefield"></h3>様、ようこそ！！
+      <img src="./ramen1.png" style="max-width: 100%; height: auto;">
+           <input type="button" id="add_to_home" value="add_to_home"/>
+           <input type="button" id="subwindow" value="sub_window"/>
+	         <input type="button" id="module_subwindow" value="module_sub_window"/>
+           <input type="button" id="qrcode" value="QRcode"/>
+           <input type="button" id="iab" value="test_for_openwindow_liff"/>
+	   	     <input type="button" id="opensetting" value="Open_Setting"/>
+	         <input type="button" id="external" value="External_Browser"/>
+           <a href="https://liff-beta2.netlify.app/line" target="_blank">LIFF_Transition</a>
+            <a href="lineb://nv/settings" target="_blank">Open_settings</a>
+            <a href="https://liff.line-beta.me/1651833033-3qqQE5V7" target="_blank">test_for_blank_liff_url</a>
+<!-- 	    	<a href="https://liff.line.me/1655828362-KLxYgqxg/liff/line">liff/line</a> -->
+	     <a href="https://www.facebook.com/">facebook</a>
+
     </script>
     </body>
 </html>

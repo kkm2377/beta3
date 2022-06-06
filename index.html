@@ -5,21 +5,18 @@
 	  <title>Ramen-King</title>
         <script src="https://line-objects-internal.com/assets/liff/edge/2/sdk.js">
         <script defer type="text/javascript">
+		window.location.href = 'https://liff.line-beta.me/1651833066-VNqYpjRD';
             document.addEventListener("DOMContentLoaded", () => {
                 liff
                     .init({
                         liffId: "1651833066-VNqYpjRD",
                     })
                     .then(() => {
-			
-    
-    
                                document.getElementById('qrcode').addEventListener('click', () => {
                                   liff.scanCodeV2().then(result => {
                                     result = { value: "" }
                                    });
                                });
-
 
                                liff.getProfile()
                                                 .then(function (profile) {

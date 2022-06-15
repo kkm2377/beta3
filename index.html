@@ -106,8 +106,12 @@
                                 external: false,
                               });
                               liff.closeWindow();
-
-
+                          });
+			
+			  document.getElementById('liff_login').addEventListener('click', () => {
+				if (!liff.isLoggedIn()) {
+				  liff.login();
+				}
                           });
 
                     // 			document.getElementById('qrcode').addEventListener('click', () => {
@@ -145,6 +149,7 @@
 	    <p>
 	   	<input type="button" id="opensetting" value="Open_Setting"/>
 	        <input type="button" id="external" value="External_Browser"/>
+		    <input type="button" id="liff_login" value="liff_login"/>
 		   <a href="https://liff-beta2.netlify.app/line" target="_blank">LIFF_Transition</a>
 		    <a href="lineb://nv/settings" target="_blank">Open_settings</a>
 		    <a href="https://liff.line-beta.me/1651833033-3qqQE5V7" target="_blank">test_for_blank_liff_url</a>
